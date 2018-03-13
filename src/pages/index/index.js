@@ -42,6 +42,7 @@ let app = new Vue({
                     //第一次获取的数据
                     this.lists = current
                 }
+                //下次可以请求数据
                 this.loading = false
                 this.pageNum++
             }) 
