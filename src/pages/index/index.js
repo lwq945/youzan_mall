@@ -8,6 +8,8 @@ import url from 'js/api.js'
 import { InfiniteScroll } from 'mint-ui';
 Vue.use(InfiniteScroll);
 
+import FootTab from 'components/FootTab.vue'
+
 let app = new Vue({
     el: '#app',
     data: {
@@ -47,5 +49,8 @@ let app = new Vue({
                 this.pageNum++
             }) 
         } 
+    },
+    components: {
+        FootTab
     }
 })
