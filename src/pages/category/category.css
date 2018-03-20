@@ -758,7 +758,7 @@ html {
   top: 0;
   left: 0;
   background-color: #f4f4f4;
-  z-index: 7;
+  z-index: 999;
 }
 
 .class-category,
