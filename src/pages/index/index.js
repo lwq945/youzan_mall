@@ -8,8 +8,9 @@ import url from 'js/api.js'
 import { InfiniteScroll } from 'mint-ui';
 Vue.use(InfiniteScroll);
 
-import FootTab from 'components/FootTab.vue'
+// import FootTab from 'components/FootTab.vue'
 import Swiper from 'components/Swiper.vue'
+import mixin from 'js/mixin.js'
 
 let app = new Vue({
     el: '#app',
@@ -59,7 +60,7 @@ let app = new Vue({
         }
     },
     components: {
-        FootTab,
         Swiper
-    }
+    },
+    mixins: [mixin]
 })

@@ -5,7 +5,8 @@ import Vue from 'vue'
 import axios from 'axios'
 import url from 'js/api.js'
 
-import FootTab from 'components/FootTab.vue'
+// import FootTab from 'components/FootTab.vue'
+import mixin from 'js/mixin.js'
 
 
 new Vue({
@@ -46,13 +47,14 @@ new Vue({
             location.href = `search.html?keyword=${list.name}&cate_id=${list.id}`  //跳转到商品列表页，传递keyword和cate_id两个参数
         }
     },
-    filters: {
-        number: function (value) {    //过滤价格，保留小数点后两位
-            return value = value.toFixed(2)
-        }
-    },
-    components: {
-        FootTab
-    }
+    mixins: [mixin]
+    // filters: {
+    //     number: function (value) {    //过滤价格，保留小数点后两位
+    //         return value = value.toFixed(2)
+    //     }
+    // },
+    // components: {
+    //     FootTab
+    // }
 })
 
