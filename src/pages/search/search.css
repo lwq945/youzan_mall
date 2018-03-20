@@ -864,7 +864,7 @@ only screen and (min-device-pixel-ratio:1.5) {
 .store-item-block .store-item-header .store-info .store-name .ouath-icon {
   display: block;
   float: left;
-  /* vertical-align: middle; */
+  vertical-align: middle; 
   margin-left: 10px;
   width: 14px;
   height: 14px;
@@ -1036,7 +1036,7 @@ only screen and (min-device-pixel-ratio:1.5) {
 
 .membercards-list-block .card-num-block {
   display: inline;
-  /* height: 20px; */
+  height: 20px; 
   position: absolute;
   top: 24px;
   right: 20px;
@@ -1071,7 +1071,7 @@ only screen and (min-device-pixel-ratio:1.5) {
 }
 
 .go-to-top {
-  display: none;
+  /* display: none; */
   position: fixed;
   right: 15px;
   bottom: 60px;
