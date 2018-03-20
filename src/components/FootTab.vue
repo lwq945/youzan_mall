@@ -42,13 +42,13 @@ export default {
   data() {
     return {
       navConfig,
-      curIndex: parseInt(index) || 0
+      curIndex: parseInt(index) || 0   //页面跳转，把相应的页面的index传递过来
     }
   },
   methods: {
     changeNav(list,index) {
       // this.curIndex = index
-      location.href = `${list.href}?index=${index}` 
+      location.href = `${list.href}?index=${index}`    //页面跳转
     }
   }
 };

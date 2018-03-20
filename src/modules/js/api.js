@@ -3,7 +3,8 @@ let url =  {
     banner: 'index/banner',
     topLists: 'category/topList',
     subLists: 'category/subList',
-    rank: 'category/rank'
+    rank: 'category/rank',
+    searchList: 'search/list'
 }
 
 let host = 'http://rapapi.org/mockjsdata/31314/'

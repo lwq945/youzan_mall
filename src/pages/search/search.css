@@ -850,21 +850,21 @@ only screen and (min-device-pixel-ratio:1.5) {
   display: inline-block;
   width: 0;
   height: 0;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .store-item-block .store-item-header .store-info .store-name .store-name-text {
   display: block;
   float: left;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   font-size: 16px;
-  padding-bottom: 2px
+  padding-bottom: 2px;
 }
 
 .store-item-block .store-item-header .store-info .store-name .ouath-icon {
   display: block;
   float: left;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   margin-left: 10px;
   width: 14px;
   height: 14px;
@@ -1036,7 +1036,7 @@ only screen and (min-device-pixel-ratio:1.5) {
 
 .membercards-list-block .card-num-block {
   display: inline;
-  height: 20px;
+  /* height: 20px; */
   position: absolute;
   top: 24px;
   right: 20px;

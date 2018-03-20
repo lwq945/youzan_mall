@@ -41,6 +41,9 @@ new Vue({
             axios.post(url.rank).then(res => {
                 this.rankData = res.data.data
             })
+        },
+        toSearch(list) {
+            location.href = `search.html?keyword=${list.name}&cate_id=${list.id}`  //跳转到商品列表页，传递keyword和cate_id两个参数
         }
     },
     filters: {

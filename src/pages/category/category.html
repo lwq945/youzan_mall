@@ -131,7 +131,8 @@
                 <li class="category-item js-category-item" 
                   v-for="list in subData.brandList"
                   :data-item-id="list.id" 
-                  :data-item-name="list.name">
+                  :data-item-name="list.name"
+                >
                   <img :src="list.image" :alt="list.name" class="category-img">
                   <span class="category-item-name">{{ list.name }}</span>
                 </li>
@@ -140,7 +141,10 @@
               <ul class="category-content">
                 <li class="category-item js-category-item" 
                   v-for="list in subData.categoryList"
-                  :data-item-id="list.id" :data-item-name="list.name">
+                  :data-item-id="list.id" 
+                  :data-item-name="list.name"
+                  @click="toSearch(list)"
+                >
                   <img :src="list.image" :alt="list.name" class="category-img">
                   <span class="category-item-name">{{ list.name }}</span>
                 </li>
