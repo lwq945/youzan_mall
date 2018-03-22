@@ -4,7 +4,8 @@ let url =  {
     topLists: 'category/topList',
     subLists: 'category/subList',
     rank: 'category/rank',
-    searchList: 'search/list'
+    searchList: 'search/list',
+    detailLists: 'goods/details'
 }
 
 let host = 'http://rapapi.org/mockjsdata/31314/'

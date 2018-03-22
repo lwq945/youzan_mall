@@ -2,6 +2,7 @@
   <div class="bottom-nav">
       <ul>
         <li :class="{active:index==curIndex}" 
+          :key="list.name"
           v-for="(list,index) in navConfig"
           @click="changeNav(list,index)"
         >
