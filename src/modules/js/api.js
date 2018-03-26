@@ -1,19 +1,20 @@
 let url =  {
-    hostLists: 'index/hostLists',
-    banner: 'index/banner',
-    topLists: 'category/topList',
-    subLists: 'category/subList',
-    rank: 'category/rank',
-    searchList: 'search/list',
-    detailLists: 'goods/details',
-    dealLists: 'goods/deal'
+    hostLists: ['get','index/hotLists'],
+    banner: ['get','index/banner'],
+    topLists: ['get','category/topLists'],
+    rank: ['get','category/rank'],
+    subLists: ['post','category/subLists'],
+    searchList: ['post','search/list'],
+    detailLists: ['get','goods/details'],
+    dealLists: ['get','goods/deal']
 }
 
-let host = 'http://rapapi.org/mockjsdata/31314/'
+// http://rap2api.taobao.org/app/mock/8405/get/index/hotLists
+let host = 'http://rap2api.taobao.org/app/mock/8405/'
 
 for (let key in url) {
     if (url.hasOwnProperty(key)) {
-         url[key] = host + url[key] ;
+         url[key] = host + url[key][0] + '/' + url[key][1];
     }
 }
 

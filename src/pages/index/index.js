@@ -37,17 +37,18 @@ let app = new Vue({
                 pageSize: this.pageSize
             }).then(res => {
                 //当前获取到的数据
-                let current = res.data.lists
-                //判断所有数据是否加载完成
-                if( current.length < this.pageSize) {
+                let curLists = res.data.lists
+                // console.log(curLists.length)
+                // //判断所有数据是否加载完成
+                if(curLists.length < this.pageSize) {
                     this.allLoaded = true
                 }
                 if(this.lists){
                     //已获取的数据和当前获取的数据合并
-                    this.lists = this.lists.concat(current)
+                    this.lists = this.lists.concat(curLists)
                 }else{
                     //第一次获取的数据
-                    this.lists = current
+                    this.lists = curLists
                 }
                 //下次可以请求数据
                 this.loading = false
