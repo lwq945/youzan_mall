@@ -26,11 +26,11 @@ new Vue({
     },
     methods: {
         getSearchLists() {
-            
+            this.loading = true
             axios.post(url.searchList,{
                 keyword,
                 id
-            }).then(res => {
+            }).then(res => {  
                 this.searchLists = res.data.lists
             })
         },

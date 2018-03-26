@@ -20,10 +20,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <!-- <link rel="stylesheet" href="./css/common.css">
   <link rel="stylesheet" href="./css/search.css"> -->
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
 </head>
 
 <body class=" " style="min-height: 667px;">
-  <div class="container with-top-search" style="min-height: 667px;" @touchmove="move">
+  <div class="container with-top-search" style="min-height: 667px;" @touchmove="move" v-cloak>
     <div class="custom-search js-search-bar">
       <form>
         <input type="search" class="custom-search-input" autocomplete="off" name="keyword" :value="keyword" placeholder="搜索更赞的商品" style="padding-left: 66px;">
@@ -31,7 +36,7 @@
       </form>
       <button class="custom-search-type-selection-btn custom-search-type-selection-btn-focus">商品</button>
       <span class="cancel">取消</span>
-      <div class="search-type-dropdown-menu" style="display: none;">
+      <div class="search-type-dropdown-menu">
         <span class="search-type-dropdown-menu-indicator">
             <i></i>
         </span>
@@ -48,8 +53,8 @@
         </div>
       </div>
     </div>
-    <div class="search-content" style="display: none;"></div>
-    <div class="content">
+    <!-- <div class="search-content" style="display: none;"></div> -->
+    <div class="content" v-if="searchLists">
       <div class="search-wrap js-waterfull-wrap">
         <ul class="js-list">
           <li class="goods-item"
@@ -73,8 +78,9 @@
         <div class="list-finished">已经没有更多了</div>
       </div>
     </div>
+    <div class="loading-more" v-if="!searchLists"><span></span></div>
     <div class="go-to-top" v-show="show" @click="toTop" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);"></div>
   </div>
+  
 </body>
-
 </html>

@@ -11,6 +11,8 @@ import url from 'js/api.js'
 import mixin from 'js/mixin.js'
 import qs from 'qs'
 
+import Swiper from 'components/Swiper.vue'
+
 
 let {id} = qs.parse(location.search.slice(1))
 let tabConfig =['商品详情','本店成交']
@@ -21,7 +23,8 @@ new Vue({
         detailLists: null,
         tabConfig,
         tabIndex: 0,
-        dealLists: null
+        dealLists: null,
+        bannerLists: null
     },
     created() {
         this.getDetailLists()
@@ -30,6 +33,13 @@ new Vue({
         getDetailLists()  {
             axios.post(url.detailLists,{id}).then(res => {
                 this.detailLists = res.data.data
+                this.bannerLists = []
+                this.detailLists.images.forEach(item => {
+                    this.bannerLists.push({
+                        clickUrl:'',
+                        image: item
+                    })
+                });
             })
         },
         changeTab(index){
@@ -42,7 +52,8 @@ new Vue({
             axios.post(url.dealLists,{id}).then(res => {
                 this.dealLists = res.data.data.lists
             })
-        }
+        } 
     },
+    components: { Swiper },
     mixins: [mixin]
 })
