@@ -6,7 +6,8 @@ let url =  {
     subLists: ['post','category/subLists'],
     searchList: ['post','search/list'],
     detailLists: ['get','goods/details'],
-    dealLists: ['get','goods/deal']
+    dealLists: ['get','goods/deal'],
+    addCart: ['post','cart/add']
 }
 
 // http://rap2api.taobao.org/app/mock/8405/get/index/hotLists
