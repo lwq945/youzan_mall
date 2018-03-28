@@ -30,10 +30,12 @@
         <div>
           <div class="js-shop-list shop-list">
             <!-- 店铺 -->
-            <div class="block block-order block-cart" v-for="(shop, shopIndex) in cartLists">
+            <div class="block block-order block-cart" 
+              v-for="(shop, shopIndex) in cartLists"
+            >
               <div class="header">
                 <div class="select-group js-select-group">
-                  <span class="check"></span>
+                  <span class="check" :class="{checked:shop.checked}"></span>
                 </div> 
                 <a class="shop-title">
                   <i class="custom-store-img">店铺：</i>
@@ -46,10 +48,14 @@
               <div>
                 <!-- 商品列表 -->
                 <ul class="js-list block block-list block-list-cart border-0">
-                  <li class="block-item block-item-cart" v-for="(good,goodIndex) in shop.goodsLists">
+                  <li class="block-item block-item-cart" 
+                    v-for="(good,goodIndex) in shop.goodsLists"
+                  >
                     <div>
-                      <div class="check-container">
-                        <span class="check"></span>
+                      <div class="check-container"  @click="selectGood(good)">
+                        <span class="check" 
+                          :class="{checked:good.checked}"
+                        ></span>
                       </div>
                       <div class="name-card clearfix">
                         <a :href="'goods.html?id='+good.id" class="thumb js-goods-link">
