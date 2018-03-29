@@ -13,7 +13,9 @@ new Vue({
     el: '.container',
     data: {
         cartLists: null,
-        total: 0
+        total: 0,
+        editShop: null,
+        editShopIndex: -1
     },
     created() {
         this.getCartLists()
@@ -62,6 +64,8 @@ new Vue({
                 
                 tempLists.forEach((shop) => {
                     shop.checked = true
+                    shop.editing = false     //是否处于编辑状态
+                    shop.editMsg = "编辑"  //正常状态信息是‘编辑’，编辑状态是‘完成’
                     shop.goodsLists.forEach((good) => {   //遍历原始数据，给每个商品添加一个是否选中属性
                         good.checked = true
                     })
@@ -83,6 +87,20 @@ new Vue({
         },
         selectAll() {
             this.allSelected = !this.allSelected
+        },
+        edit(shop,shopIndex) {
+            shop.editing = !shop.editing
+            shop.editMsg = shop.editing ? '完成' : '编辑'
+            this.cartLists.forEach( (item,index) => {    //遍历店铺
+                if(shopIndex !== index){    //其他店铺都处于非编辑状态
+                    item.editing = false
+                    item.editMsg = shop.editing ? '' : '编辑'
+                }
+                
+                this.editShop = shop.editing ? shop : null    //全局变量，用来处理不是数据列表中的数据渲染(获取处于编辑状态的店铺)
+                this.editShopIndex = shop.editing ? shopIndex : -1  //获取处于编辑状态的店铺的下标
+            })
+
         }
     },
     components: {},
