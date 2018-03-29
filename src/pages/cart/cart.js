@@ -12,7 +12,8 @@ import mixin from 'js/mixin.js'
 new Vue({
     el: '.container',
     data: {
-        cartLists: null
+        cartLists: null,
+        total: 0
     },
     created() {
         this.getCartLists()
@@ -35,6 +36,23 @@ new Vue({
                     })
                 })
             }
+        },
+        selectLists() { //选中的商品列表
+            if(this.cartLists && this.cartLists.length) {
+                let selectArr = []
+                let total = 0
+                this.cartLists.forEach(shop => {   //遍历所有店铺的所有商品，找出选中的商品，push进selectArr
+                    shop.goodsLists.forEach(good => { 
+                        if(good.checked) {
+                            selectArr.push(good)
+                            total += good.price * good.number
+                        }
+                    })
+                })
+                this.total = total
+                return selectArr
+            }
+            return []
         }
     },
     methods: {
