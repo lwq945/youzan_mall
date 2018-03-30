@@ -135,6 +135,23 @@ new Vue({
                 this.editingShopIndex = shop.editing ? shopIndex : -1  //获取处于编辑状态的店铺的下标
             })
 
+        },
+        reduce(good) {
+            if(good.number === 1) return
+            axios.post(url.cartReduce,{
+                id: good.id,
+                number: 1
+            }).then(res => {
+                good.number--
+            })
+        },
+        add(good) {
+            axios.post(url.cartAdd,{
+                id: good.id,
+                number: 1
+            }).then(res => {
+                good.number++
+            })
         }
     },
     components: {},

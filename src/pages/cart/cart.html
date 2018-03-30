@@ -40,7 +40,7 @@
                   <!-- 编辑状态下选择的展示 -->
                   <span class="check" :class="{checked:shop.removeChecked}" v-show="editingShop"></span>
                 </div> 
-                <a href="#" class="shop-title"><i class="custom-store-img">店铺：</i><span>{{ shop.shopTitle }}</span></a>
+                <a href="#" class="shop-title"><i class="custom-store-img">店铺：</i>{{ shop.shopTitle }}</a>
                 <a href="javascript:;" data-type="cart" class="j-edit-list pull-right c-blue font-size-12 edit-list" 
                   @click="edit(shop,shopIndex)"
                 >
@@ -53,7 +53,6 @@
                   <li class="block-item block-item-cart" 
                     :class="{editing:shop.editing}"
                     v-for="(good,goodIndex) in shop.goodsLists"
-
                   >
                     <div>
                       <div class="check-container"  @click="selectGood(shop,good)">
@@ -80,11 +79,11 @@
                           <!-- 编辑状态 -->
                           <div class="num" v-show="shop.editing">
                             <div class="quantity">
-                              <button type="button" class="minus disabled"></button>
+                              <button type="button" class="minus" :class="{disabled:good.number===1}"></button>
                               <input type="text" pattern="[0-9]*" class="txt" v-model="good.number">
                               <button type="button" class="plus "></button>
-                              <div class="response-area response-area-minus"></div>
-                              <div class="response-area response-area-plus"></div>
+                              <div class="response-area response-area-minus" @click="reduce(good)"></div>
+                              <div class="response-area response-area-plus" @click="add(good)"></div>
                             </div>
                           </div>
                           <div class="price c-orange">

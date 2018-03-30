@@ -8,7 +8,13 @@ let url =  {
     detailLists: ['get','goods/details'],
     dealLists: ['get','goods/deal'],
     addCart: ['post','cart/add'],
-    cartList: ['get','cart/list']
+    cartList: ['get','cart/list'],
+    cartReduce: ['post','cart/reduce'],
+    cartAdd: ['post','cart/Add'],
+    cartRemove: ['post','cart/remove'],
+    cartMRemove: ['post','cart/mremove'],
+    cartUpdate: ['post','cart/update']
+
 }
 
 // http://rap2api.taobao.org/app/mock/8405/get/index/hotLists
