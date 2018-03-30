@@ -92,7 +92,7 @@
                         </div>
                         <div class="error-box"></div>
                       </div>
-                      <div class="delete-btn">
+                      <div class="delete-btn" @click="remove(shop,shopIndex,good,goodIndex)">
                         <span>删除</span>
                       </div>
                     </div>
@@ -166,6 +166,22 @@
       </div>
     </div>
 
+    <!-- 阴影层mask -->
+    <div class="van-modal" style="z-index: 2000;" v-show="removePopup"></div>
+    <!-- 弹出层popout -->
+    <div class="van-dialog" style="z-index: 2001;" v-show="removePopup">
+      <div class="van-dialog__content van-hairline">
+        <div class="van-dialog__message">确定要删除该商品么?</div>
+      </div>
+      <div class="van-dialog__footer is-twobtn">
+        <button class="van-button van-dialog__cancel van-button--default van-button--large">
+          <span class="van-button__text">取消</span>
+        </button>
+        <button class="van-button van-dialog__confirm van-button--default van-button--large van-hairline--left" @click="removeConfirm()">
+          <span class="van-button__text">确认</span>
+        </button>
+      </div>
+    </div>
     <div class="footer" style="min-height: 86px;">
       <div class="copyright">
         <div class="ft-copyright " style="background-image: url(https://img.yzcdn.cn/upload_files/2016/11/15/147918630760182374.png);">

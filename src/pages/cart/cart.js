@@ -15,7 +15,9 @@ new Vue({
         cartLists: null,
         total: 0,
         editingShop: null,
-        editingShopIndex: -1
+        editingShopIndex: -1,
+        removePopup: false,   //删除弹窗
+        removeData: null
     },
     created() {
         this.getCartLists()
@@ -104,25 +106,25 @@ new Vue({
                 this.cartLists = tempLists  //再赋值
             })
         },
-        selectGood(shop,good) {
+        selectGood(shop,good) {   //选中商品
            let attr = this.editingShop? 'removeChecked' : 'checked'  //判断是否处于编辑状态
             good[attr] = !good[attr]
             shop[attr] = shop.goodsLists.every( good => {   //店铺的选中由它底下的所有商品的选中状态决定，遍历该店铺的所有商品，是否都是选中，若都选中，则店铺也处在选中状态
                 return good[attr]
             })
         },
-        selectShop(shop) {
+        selectShop(shop) {   //选中店铺
             let attr = this.editingShop? 'removeChecked' : 'checked'  //判断是否处于编辑状态
             shop[attr] = !shop[attr]  //取反
             shop.goodsLists.forEach(good => {  //遍历所有商品，商品的选中状态由店铺的选中决定，当店铺被选中，它底下的所有商品都被选中
                 good[attr] = shop[attr]
             })
         },
-        selectAll() {
+        selectAll() {  //选中全选
             let attr = this.editingShop? 'allRemoveSelected' : 'allSelected'  //判断是否处于编辑状态
             this[attr] = !this[attr]
         },
-        edit(shop,shopIndex) {
+        edit(shop,shopIndex) { //
             shop.editing = !shop.editing
             shop.editMsg = shop.editing ? '完成' : '编辑'
             this.cartLists.forEach( (item,index) => {    //遍历店铺
@@ -136,7 +138,7 @@ new Vue({
             })
 
         },
-        reduce(good) {
+        reduce(good) {  //减少数量
             if(good.number === 1) return
             axios.post(url.cartReduce,{
                 id: good.id,
@@ -145,13 +147,46 @@ new Vue({
                 good.number--
             })
         },
-        add(good) {
+        add(good) {   //增加数量
             axios.post(url.cartAdd,{
                 id: good.id,
                 number: 1
             }).then(res => {
                 good.number++
             })
+        },
+        remove(shop,shopIndex,good,goodIndex) {
+            this.removePopup = true
+            this.removeData = {shop,shopIndex,good,goodIndex}
+        },
+        removeConfirm() {
+            let {shop,shopIndex,good,goodIndex} = this.removeData
+            axios.post(url.cartRemove,{
+                id: good.id
+            }).then(res => {
+                shop.goodsLists.splice(goodIndex,1)
+                if(!shop.goodsLists.length) {   //当店铺下没有商品时，就删掉店铺
+                    this.cartLists.splice(shopIndex,1)
+                    this.removeShop()   //删除完店铺，要把没删除的店铺切换成正常状态
+                }
+                this.removePopup = false
+            })
+        },
+        removeShop() {
+            this.editingShop = null
+            this.editingShopIndex = -1
+            this.cartLists.forEach(shop => {
+                shop.editing = false
+                shop.editMsg = "编辑"
+            })
+        }
+    },
+    watch: {
+        removePopup(value,oldValue) {
+            document.body.style.overflow = value ? 'hidden': 'auto'
+            document.querySelector('html').style.overflow = value ? 'hidden': 'auto'
+            document.body.style.height = value ? '100%' : 'auto'
+            document.querySelector('html').style.height = value ? 'hidden': 'auto'
         }
     },
     components: {},

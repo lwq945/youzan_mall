@@ -1709,3 +1709,148 @@ only screen and (min-device-pixel-ratio: 1.5) {
   top: initial;
   bottom: 0px
 }
+
+
+
+.van-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.7);
+}
+
+[class*=van-hairline]:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  -webkit-transform: scale(.5);
+  -moz-transform: scale(.5);
+  -ms-transform: scale(.5);
+  transform: scale(.5);
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  pointer-events: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 0 solid #e5e5e5;
+}
+
+.van-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 85%;
+  font-size: 16px;
+  overflow: hidden;
+  -webkit-transition: .2s;
+  -moz-transition: .2s;
+  transition: .2s;
+  border-radius: 4px;
+  background-color: #fff;
+  -webkit-transform: translate3d(-50%,-50%,0);
+  -moz-transform: translate3d(-50%,-50%,0);
+  transform: translate3d(-50%,-50%,0);
+}
+
+[class*=van-hairline] {
+  position: relative;
+}
+
+.van-dialog__message {
+  line-height: 1.5;
+  padding: 15px 20px;
+}
+
+.van-dialog__content:after {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.van-dialog__footer.is-twobtn {
+  display: flex;
+}
+
+.van-dialog__footer {
+  overflow: hidden;
+}
+
+.van-dialog .van-button {
+  border: 0;
+}
+
+
+.van-button--large {
+  width: 100%;
+  height: 50px;
+  line-height: 48px;
+}
+
+
+
+.van-button {
+  position: relative;
+  padding: 0;
+  display: inline-block;
+  height: 45px;
+  line-height: 43px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 16px;
+  text-align: center;
+  -webkit-appearance: none;
+}
+
+.van-button:active {
+  background: #ccc;
+}
+
+.van-button--default {
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #333;
+  outline: none;
+}
+
+.van-dialog__footer.is-twobtn .van-button {
+  flex: 1;
+}
+
+
+.van-button:before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  border: inherit;
+  border-color: #000;
+  background-color: #000;
+  border-radius: inherit;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+
+.van-dialog__confirm, .van-dialog__confirm:active {
+  color: #00c000;
+}
+
+.van-hairline--left:after {
+  border-left-width: 1px;
+}
+
+
