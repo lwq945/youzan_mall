@@ -17,7 +17,8 @@ new Vue({
         editingShop: null,
         editingShopIndex: -1,
         removePopup: false,   //删除弹窗
-        removeData: null
+        removeData: null,
+        removeMsg: ''
     },
     created() {
         this.getCartLists()
@@ -86,7 +87,6 @@ new Vue({
             }
             return []
         }
-
     },
     methods: {
         getCartLists() {
@@ -155,22 +155,56 @@ new Vue({
                 good.number++
             })
         },
-        remove(shop,shopIndex,good,goodIndex) {
+        remove(shop,shopIndex,good,goodIndex) {   //删除单个商品
             this.removePopup = true
             this.removeData = {shop,shopIndex,good,goodIndex}
+            this.removeMsg = '确定要删除该商品么?'
+        },
+        removeMoreLists() {               //删除多个商品
+            this.removePopup = true
+            this.removeMsg = `确定要删除${this.removeLists.length}个商品么?`
         },
         removeConfirm() {
-            let {shop,shopIndex,good,goodIndex} = this.removeData
-            axios.post(url.cartRemove,{
-                id: good.id
-            }).then(res => {
-                shop.goodsLists.splice(goodIndex,1)
-                if(!shop.goodsLists.length) {   //当店铺下没有商品时，就删掉店铺
-                    this.cartLists.splice(shopIndex,1)
-                    this.removeShop()   //删除完店铺，要把没删除的店铺切换成正常状态
-                }
-                this.removePopup = false
-            })
+            if(this.removeMsg === '确定要删除该商品么?'){
+                let {shop,shopIndex,good,goodIndex} = this.removeData
+                axios.post(url.cartRemove,{
+                    id: good.id
+                }).then(res => {
+                    shop.goodsLists.splice(goodIndex,1)
+                    if(!shop.goodsLists.length) {   //当店铺下没有商品时，就删掉店铺
+                        this.cartLists.splice(shopIndex,1)
+                        this.removeShop()   //删除完店铺，要把没删除的店铺切换成正常状态
+                    }
+                    this.removePopup = false
+                })
+            }else {
+                let ids = []
+                this.removeLists.forEach(good => {   //遍历编辑状态下选中删除的商品的id
+                    ids.push(good.id)
+                })
+                axios.post(url.cartMRemove,{
+                    ids
+                }).then(res => {
+                    let arr = []
+                    this.editingShop.goodsLists.forEach(good => {   //遍历当前编辑的店铺的所有商品，是否有和选中删除的商品的id一样，有就返回id，没有返回-1
+                        let index = this.removeLists.findIndex(item => {
+                            return item.id == good.id
+                        })
+
+                        if(index === -1) {  //如果是没有选中的商品，就push进arr
+                            arr.push(good)
+                        }
+                    })
+
+                    if(arr.length){    //判断没有被选中删除的商品数组的长度，true的话，就把没有被选中删除的商品数组赋值给当前编辑店铺的商品列表（也就是删除掉被选中删除状态是商品）
+                        this.editingShop.goodsLists = arr
+                    }else {
+                        this.cartLists.splice(this.editingShopIndex,1)  //当前编辑店铺下没有商品时，就删掉店铺
+                        this.removeShop()
+                    }
+                    this.removePopup = false
+                })
+            }
         },
         removeShop() {
             this.editingShop = null
