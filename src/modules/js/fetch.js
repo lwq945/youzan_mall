@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+//对axios封装
 function fetch(url,data) {  //返回一个Promise对象
     return new Promise((resolve,reject) => {
         axios.post(url,data).then(res => {

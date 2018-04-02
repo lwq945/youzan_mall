@@ -56,6 +56,7 @@
                     @touchstart="start($event,good)"
                     @touchend="end($event,shopIndex,good,goodIndex)"
                     :ref="'good-'+shopIndex+'-'+goodIndex"
+                    :key="good.id"
                   >
                     <div>
                       <div class="check-container"  @click="selectGood(shop,good)">
