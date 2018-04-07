@@ -1,14 +1,17 @@
 <template>
    <div class="container " style="min-height: 597px;">
-    <div class="block-list address-list section section-first js-no-webview-block">
-      <a class="block-item js-address-item address-item" @click="toEdit">
-        <div class="address-title">lwq 15888888888</div>
-        <p>福建省厦门市湖里区</p>
+    <div class="block-list address-list section section-first js-no-webview-block" v-if="lists&&lists.length">
+      <a class="block-item js-address-item address-item" 
+        v-for="list in lists"
+        :class="{'address-item-default':list.isDefault}"
+        :key="list.id"
+        @click="toEdit">
+        <div class="address-title">{{list.name}} {{list.tel}}</div>
+        <p>{{list.provinceName}}{{list.cityName}}{{list.districtName}}{{list.address}}</p>
       </a>
-      <a class="block-item js-address-item address-item address-item-default" @click="toEdit">
-        <div class="address-title">lwq945 15999999999</div>
-        <p>福建省厦门市思明区软件园二期</p>
-      </a>
+    </div>
+    <div v-if="lists&&!lists.length">
+      <p>没有设置地址，请添加！</p>
     </div>
     <div class="block stick-bottom-row center">
         <router-link class="btn btn-blue js-no-webview-block js-add-address-btn" to="/address/form">
@@ -19,7 +22,19 @@
 </template>
 
 <script>
+import Address from 'js/addressServer.js'
+
 export default {
+  data() {
+    return {
+      lists: null
+    }
+  },
+  created() {
+    Address.getList().then(res =>{
+      this.lists = res.data.lists
+    })
+  },
   methods: {
       toEdit() {
           this.$router.push({path:'/address/form'})
