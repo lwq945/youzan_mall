@@ -24,10 +24,12 @@ let routes = [
             },
             {
                 path: 'all',
+                name:'all',
                 component: all
             },
             {
                 path: 'form',
+                name: 'form',
                 component: form
             }
         ]

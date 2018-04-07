@@ -5,7 +5,7 @@
         v-for="list in lists"
         :class="{'address-item-default':list.isDefault}"
         :key="list.id"
-        @click="toEdit">
+        @click="toEdit(list)">
         <div class="address-title">{{list.name}} {{list.tel}}</div>
         <p>{{list.provinceName}}{{list.cityName}}{{list.districtName}}{{list.address}}</p>
       </a>
@@ -14,7 +14,8 @@
       <p>没有设置地址，请添加！</p>
     </div>
     <div class="block stick-bottom-row center">
-        <router-link class="btn btn-blue js-no-webview-block js-add-address-btn" to="/address/form">
+        <router-link class="btn btn-blue js-no-webview-block js-add-address-btn" 
+          :to="{name:'form',query:{type:'add'}}">
             新增地址
         </router-link>
     </div>
@@ -36,8 +37,11 @@ export default {
     })
   },
   methods: {
-      toEdit() {
-          this.$router.push({path:'/address/form'})
+      toEdit(list) {   //编辑时要把当前的地址信息带过来
+          this.$router.push({name:'form',query:{
+            type: 'edit',
+            instance: list  //当前编辑的实例
+          }})
       }
   }
 }
