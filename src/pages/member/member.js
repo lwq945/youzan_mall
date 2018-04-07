@@ -24,7 +24,7 @@ let routes = [
             },
             {
                 path: 'all',
-                name:'all',
+                name:'all',   //命名路由
                 component: all
             },
             {
