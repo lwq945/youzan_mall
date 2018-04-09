@@ -1,8 +1,8 @@
 <template>
    <div class="container " style="min-height: 597px;">
-    <div class="block-list address-list section section-first js-no-webview-block" v-if="lists&&lists.length">
+    <div class="block-list address-list section section-first js-no-webview-block" v-if="allLists&&allLists.length">
       <a class="block-item js-address-item address-item" 
-        v-for="list in lists"
+        v-for="list in allLists"
         :class="{'address-item-default':list.isDefault}"
         :key="list.id"
         @click="toEdit(list)">
@@ -10,7 +10,7 @@
         <p>{{list.provinceName}}{{list.cityName}}{{list.districtName}}{{list.address}}</p>
       </a>
     </div>
-    <div v-if="lists&&!lists.length">
+    <div v-if="allLists&&!allLists.length">
       <p>没有设置地址，请添加！</p>
     </div>
     <div class="block stick-bottom-row center">
@@ -23,18 +23,18 @@
 </template>
 
 <script>
-import Address from 'js/addressServer.js'
+// import Address from 'js/addressServer.js'
 
 export default {
-  data() {
-    return {
-      lists: null
-    }
-  },
+  
   created() {
-    Address.getList().then(res =>{
-      this.lists = res.data.lists
-    })
+    //Action 通过 store.dispatch 方法触发
+    this.$store.dispatch('getLists')
+  },
+  computed: {
+    allLists() {  //计算属性读取store实例的状态
+      return this.$store.state.allLists
+    }
   },
   methods: {
       toEdit(list) {   //编辑时要把当前的地址信息带过来

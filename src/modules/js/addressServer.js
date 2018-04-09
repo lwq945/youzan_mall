@@ -3,7 +3,7 @@ import url from 'js/api.js'
 
 
 class Address{
-    static getList() {
+    static list() {
         return fetch(url.addressList)
     }
 

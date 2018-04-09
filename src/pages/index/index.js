@@ -21,7 +21,10 @@ let app = new Vue({
         pageNum: 1,
         pageSize: 6,
         loading: false,
-        allLoaded: false
+        allLoaded: false,
+        testData: {
+            number: 10
+        }
     },
     created() {
         this.getLists()
@@ -59,6 +62,10 @@ let app = new Vue({
             axios.post(url.banner).then(res => {
                 this.bannerLists = res.data.lists
             })
+        },
+        changeNum(num) {
+            console.log(num)
+            this.testData.number = num
         }
     },
     components: {
