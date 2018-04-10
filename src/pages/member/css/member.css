@@ -63,7 +63,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
   border-top: 2px solid #e5e5e5;
   border-bottom: 2px solid #e5e5e5;
   overflow: hidden;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
   background-color: #fff;
   display: block;
   position: relative;
@@ -763,7 +763,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  float: left
+  float: left;
 }
 
 .order-related .uc-order.list-horizon .link {

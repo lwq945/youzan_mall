@@ -85,7 +85,7 @@
 
 
 
-<style  scoped>
+<style>
   @import '../css/member_base.css';
   @import '../css/member.css';
 </style>

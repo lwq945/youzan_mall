@@ -26,14 +26,15 @@
 // import Address from 'js/addressServer.js'
 
 export default {
-  
-  created() {
-    //Action 通过 store.dispatch 方法触发
-    this.$store.dispatch('getLists')
-  },
   computed: {
     allLists() {  //计算属性读取store实例的状态
       return this.$store.state.allLists
+    }
+  },
+  created() {
+    //Action 通过 store.dispatch 方法触发
+    if(!this.allLists) {  //只在allLists为null触发
+       this.$store.dispatch('getLists')
     }
   },
   methods: {
