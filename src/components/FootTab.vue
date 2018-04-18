@@ -45,14 +45,7 @@ export default {
     return {
       navConfig,
       curIndex: parseInt(index) || 0,  //页面跳转，把相应的页面的index传递过来
-      objData: JSON.parse(JSON.stringify(this.obj))  //接收父组件传递的数据
     }
-  },
-  created() {
-    setTimeout(() => {
-      //this.objData.number = 20   //修改数据源
-      this.$emit('change',30)
-    },3000)
   },
   methods: {
     changeNav(list,index) {

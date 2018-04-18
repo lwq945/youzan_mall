@@ -21,10 +21,7 @@ let app = new Vue({
         pageNum: 1,
         pageSize: 6,
         loading: false,
-        allLoaded: false,
-        testData: {
-            number: 10
-        }
+        allLoaded: false
     },
     created() {
         this.getLists()
@@ -39,33 +36,30 @@ let app = new Vue({
                 pageNum: this.pageNum,
                 pageSize: this.pageSize
             }).then(res => {
+                this.lists = res.data.lists
                 //当前获取到的数据
-                let curLists = res.data.lists
-                // console.log(curLists.length)
-                // //判断所有数据是否加载完成
-                if(curLists.length < this.pageSize) {
-                    this.allLoaded = true
-                }
-                if(this.lists){
-                    //已获取的数据和当前获取的数据合并
-                    this.lists = this.lists.concat(curLists)
-                }else{
-                    //第一次获取的数据
-                    this.lists = curLists
-                }
-                //下次可以请求数据
-                this.loading = false
-                this.pageNum++
+                // let curLists = res.data.lists
+                // // console.log(curLists.length)
+                // // //判断所有数据是否加载完成
+                // if(curLists.length < this.pageSize) {
+                //     this.allLoaded = true
+                // }
+                // if(this.lists){
+                //     //已获取的数据和当前获取的数据合并
+                //     this.lists = this.lists.concat(curLists)
+                // }else{
+                //     //第一次获取的数据
+                //     this.lists = curLists
+                // }
+                // //下次可以请求数据
+                // this.loading = false
+                // this.pageNum++
             }) 
         },
         getBanner() {
             axios.post(url.banner).then(res => {
                 this.bannerLists = res.data.lists
             })
-        },
-        changeNum(num) {
-            console.log(num)
-            this.testData.number = num
         }
     },
     components: {
